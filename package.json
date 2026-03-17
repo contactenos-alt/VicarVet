@@ -1,0 +1,19 @@
+{
+  "name": "vetgpt-vicar",
+  "version": "1.0.0",
+  "description": "VetGPT - Asistente veterinario con RAG para Vicar",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "ingest": "node scripts/ingest.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.8",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "openai": "^4.71.1"
+  }
+}
