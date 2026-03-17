@@ -36,6 +36,20 @@ Después de cambios en `services/config.js`, ejecuta una nueva ingesta para refr
 curl -X POST http://localhost:3000/api/ingest
 ```
 
+## Compilación en Codemagic
+
+Este repositorio ya incluye `codemagic.yaml` con el workflow `vicarvet_web` para:
+
+- Instalar dependencias
+- Ejecutar validaciones de sintaxis (`node --check`)
+- Generar artefacto en carpeta `build/`
+
+En Codemagic:
+
+1. Conecta el repositorio.
+2. Selecciona el workflow `vicarvet_web`.
+3. (Opcional) define variables de entorno como `OPENAI_API_KEY` y `OPENAI_MODEL` si deseas respuestas con modelo GPT en runtime.
+
 ## Variables opcionales
 
 - `OPENAI_API_KEY` para generación de respuesta con GPT.
