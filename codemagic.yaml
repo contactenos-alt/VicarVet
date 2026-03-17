@@ -1,0 +1,45 @@
+workflows:
+  vicarvet_web:
+    name: VicarVet Web Build
+    max_build_duration: 30
+    instance_type: linux_x2
+
+    environment:
+      node: 20.11.1
+      vars:
+        APP_NAME: "vicarvet"
+
+    cache:
+      cache_paths:
+        - ~/.npm
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+
+      - name: Static checks
+        script: |
+          node --check server.js
+          node --check routes/chat.js
+          node --check services/config.js
+          node --check services/contactDirectory.js
+          node --check services/productUrls.js
+          node --check services/embedding.js
+          node --check services/retrieval.js
+          node --check services/llm.js
+          node --check services/ingestion.js
+          node --check services/vectorStore.js
+          node --check public/app.js
+
+      - name: Prepare build artifact
+        script: |
+          rm -rf build
+          mkdir -p build
+          cp -R public routes scripts services build/
+          cp server.js package.json README.md build/
+          echo "Build prepared at build/"
+
+    artifacts:
+      - build/**
+      - codemagic.yaml
